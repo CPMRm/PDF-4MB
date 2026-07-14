@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 線上極速壓縮</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #ff4d4f;
+            margin-bottom: 0.5rem;
+            font-size: 1.6rem;
+        }
+        p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+        .drop-zone {
+            display: block;
+            border: 2px dashed #ff4d4f;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #fff6f6;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 1rem;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: #e03e3f;
+        }
+        .file-info {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #2f80ed;
+            font-weight: bold;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
 
+<div class="container">
+    <h1>PDF 檔案壓縮器</h1>
+    <p>請上傳您的 PDF 檔案，系統將自動進行壓縮，幫您控制在 4MB 以下。</p>
+    
+    <form action="/" method="POST" enctype="multipart/form-data" id="uploadForm">
+        <label class="drop-zone" for="fileInput">
+            <span id="dropZoneText">點擊此處選擇 PDF 檔案</span>
+            <input type="file" name="file" id="fileInput" accept=".pdf" required>
+        </label>
+        <div id="fileInfo" class="file-info"></div>
+        <button type="submit" class="btn" style="margin-top: 1rem;">開始壓縮並下載</button>
+    </form>
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const dropZoneText = document.getElementById('dropZoneText');
+
+    fileInput.addEventListener('change', (e) => {
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+            dropZoneText.innerText = "已選取檔案";
+            fileInfo.innerText = `已選：${file.name} (${sizeInMB} MB)`;
+        }
+    });
+</script>
+
+</body>
+</html>
